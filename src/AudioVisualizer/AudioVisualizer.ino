@@ -93,7 +93,6 @@
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
 /// <summary>
 /// inherit from the 'AudioControlSGTL5000' class to modify the CHIP_ANA_ADC_CTRL register
 /// </summary>
@@ -103,17 +102,17 @@ public:
     void attGAIN(uint8_t att) { modify(0x0020, (att & 1) << 8, 1 << 8); }
 };
 
-// namespace for draw primitives
+// namespace for draw graphics primitives
 using namespace tgx;
 
 // framebuffers
-DMAMEM uint16_t internalBuffer[240 * 320]; // used for internal buffering
-DMAMEM uint16_t frontBuffer[240 * 320];    // paint in this buffer
-DMAMEM uint16_t backBuffer[240 * 320];     // background buffer
+DMAMEM uint16_t internalBuffer[240 * 320] = { 0 }; // used for internal buffering
+DMAMEM uint16_t frontBuffer[240 * 320] = { 0 };    // paint in this buffer
+DMAMEM uint16_t backBuffer[240 * 320] = { 0 };     // background buffer
 
 // samplebuffers
-int16_t samplesLeft[2048];
-int16_t samplesRight[2048];
+int16_t samplesLeft[2048] = { 0 };
+int16_t samplesRight[2048] = { 0 };
 
 // the screen driver object
 ILI9341_T4::ILI9341Driver tft(PIN_CS, PIN_DC, PIN_SCK, PIN_MOSI, PIN_MISO, PIN_RESET, PIN_TOUCH_CS, PIN_TOUCH_IRQ);
