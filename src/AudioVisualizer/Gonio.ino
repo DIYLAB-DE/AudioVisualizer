@@ -294,8 +294,8 @@ void drawGonioAndCorrelation(uint16_t totalLength, bool reset) {
     uint16_t x = 0, y = 0, corrPos = 0, corrBarLength = 0;
     float xL = 0.0f, xR = 0.0f, xNorm = 0.0f, yL = 0.0f, yR = 0.0f, yNorm = 0.0f, normL = 0.0f, normR = 0.0f, maxAmp = 0.0f, value = 0.0f, runningTotal = 0.0f, maxL = 0.0f, maxR = 0.0f, avg = 0.0f;
 
-    // blitting front/back
-    im.blit(bg, 0, 64, 0, 64, 213, 224);
+    // copy rectangle from back to front
+    copyRect(frontBuffer, backBuffer, 0, 64, 213, 224);
 
     // loop through the samples
     for (uint16_t i = 0; i < GONIO_SampleBlocks * 128; i++) {

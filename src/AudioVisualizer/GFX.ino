@@ -35,10 +35,10 @@ void drawTextCenterX(Image<RGB565> img, const char* text, int y, int w, RGB565 c
 /// <param name="poY"></param>
 /// <param name="color"></param>
 /// <param name="fnt"></param>
-void drawNumber(Image<RGB565> img, long long_num, int poX, int poY, RGB565 color, ILI9341_t3_font_t fnt) {
+void drawNumber(Image<RGB565> img, long long_num, int poX, int poY, RGB565 color, const ILI9341_t3_font_t& font) {
     char str[14];
     ltoa(long_num, str, 10);
-    img.drawText(str, iVec2(poX, poY), color, fnt, false);
+    img.drawText(str, iVec2(poX, poY), color, font, false);
 }
 
 /// <summary>
@@ -51,7 +51,7 @@ void drawNumber(Image<RGB565> img, long long_num, int poX, int poY, RGB565 color
 /// <param name="poY"></param>
 /// <param name="color"></param>
 /// <param name="fnt"></param>
-void drawFloat(Image<RGB565> img, float floatNumber, int dp, int poX, int poY, RGB565 color, ILI9341_t3_font_t fnt) {
+void drawFloat(Image<RGB565> img, float floatNumber, int dp, int poX, int poY, RGB565 color, const ILI9341_t3_font_t& font) {
     char str[14];                   // array to contain decimal string
     uint8_t ptr = 0;                // initialise pointer for array
     int8_t digits = 1;              // count the digits to avoid array overflow
@@ -112,7 +112,21 @@ void drawFloat(Image<RGB565> img, float floatNumber, int dp, int poX, int poY, R
     }
 
     // finally we can plot the string and return pixel length
-    img.drawText(str, iVec2(poX, poY), color, fnt, false);
+    img.drawText(str, iVec2(poX, poY), color, font, false);
+}
+
+/// <summary>
+/// copy rectangle in memory 
+/// </summary>
+/// <param name="dest"></param>
+/// <param name="src"></param>
+/// <param name="x"></param>
+/// <param name="y"></param>
+/// <param name="w"></param>
+/// <param name="h"></param>
+static inline __attribute__((always_inline)) void copyRect(uint16_t* dest, uint16_t* src, int16_t x, int16_t y, int16_t w, int16_t h) {
+    for (uint16_t i = y; i < y + h; i++)
+        memcpy(dest + (x + i * 240), src + (x + i * 240), w * 2);
 }
 
 /// <summary>

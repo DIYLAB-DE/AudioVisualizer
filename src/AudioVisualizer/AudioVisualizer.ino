@@ -53,7 +53,7 @@
  // USER CONFIG SECTION (please only edit here!)                                                 //
  //////////////////////////////////////////////////////////////////////////////////////////////////
 
-#define VERSION "v2.0.0, 14.08.2021"
+#define VERSION "v2.0.1, 27.08.2021"
 #define SHOWLOGO                true  // show logo
 #define BUTTON                     0  // PIN0
 #define IR                         4  // PIN4
@@ -112,8 +112,8 @@ DMAMEM uint16_t frontBuffer[240 * 320];    // paint in this buffer
 DMAMEM uint16_t backBuffer[240 * 320];     // background buffer
 
 // samplebuffers
-/*DMAMEM*/ int16_t samplesLeft[2048];
-/*DMAMEM*/ int16_t samplesRight[2048];
+int16_t samplesLeft[2048];
+int16_t samplesRight[2048];
 
 // the screen driver object
 ILI9341_T4::ILI9341Driver tft(PIN_CS, PIN_DC, PIN_SCK, PIN_MOSI, PIN_MISO, PIN_RESET, PIN_TOUCH_CS, PIN_TOUCH_IRQ);
